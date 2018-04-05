@@ -1,0 +1,42 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "log": {
+      "properties": {
+        "message": {
+          "type": "text"
+        },
+        "dateTime": {
+            "type": "date"
+        },
+        "level": {
+            "type": "keyword"
+        },
+        "line": {
+            "type": "integer"
+        },
+        "function": {
+            "type": "text"
+        },
+        "file": {
+            "type": "text"
+        },
+        "thread": {
+            "type": "text"
+        },
+        "deviceModel": {
+            "type": "keyword"
+        },
+        "iOSVersion": {
+            "type": "keyword"
+        },
+        "deviceUid" : {
+            "type": "keyword"
+        }
+      }
+    }
+  }
+}

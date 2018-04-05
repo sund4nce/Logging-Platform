@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "6bbdb692-f33b-4700-b07c-a98ab0d46db3",
+		"name": "Kibana",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Index",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"settings\": {\n    \"number_of_shards\": 1,\n    \"number_of_replicas\": 1\n  },\n  \"mappings\": {\n    \"log\": {\n      \"properties\": {\n        \"message\": {\n          \"type\": \"text\"\n        },\n        \"timestamp\": {\n            \"type\": \"date\"\n        },\n        \"level\": {\n            \"type\": \"keyword\"\n        },\n        \"line\": {\n            \"type\": \"integer\"\n        },\n        \"function\": {\n            \"type\": \"text\"\n        },\n        \"thread\": {\n            \"type\": \"keyword\"\n        },\n        \"deviceModel\": {\n            \"type\": \"keyword\"\n        }\n      }\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://159.89.0.101:9200/logs",
+					"protocol": "http",
+					"host": [
+						"159",
+						"89",
+						"0",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"logs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				},
+				"description": "\t"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Log",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"level\": \"debug\",\n\t\"line\": 15,\n\t\"function\": \"viewDidLoad()\",\n\t\"file\": \"ViewController.swift\",\n\t\"message\": \"Sample Message\",\n\t\"timestamp\": 1522835415,\n\t\"thread\": \"main,\n\t\"deviceModel\": \"x86\"\n}"
+				},
+				"url": {
+					"raw": "https://ecbfdc1eab23dcbd1276cfef6422f749.eu-central-1.aws.cloud.es.io:9243/logs/log",
+					"protocol": "https",
+					"host": [
+						"ecbfdc1eab23dcbd1276cfef6422f749",
+						"eu-central-1",
+						"aws",
+						"cloud",
+						"es",
+						"io"
+					],
+					"port": "9243",
+					"path": [
+						"logs",
+						"log"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Log",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Bulk Log",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"index\" : { \\\"_index\\\" : \\\"log\\\", \\\"_type\\\" : \\\"_doc\\\" } }\n{\\\"thread\\\":\\\"main\\\",\\\"function\\\":\\\"viewDidLoad()\\\",\\\"level\\\":\\\"error\\\",\\\"message\\\":\\\"Hello There\\\",\\\"file\\\":\\\"\\\\/Users\\\\/florian\\\\/Development\\\\/Repositories\\\\/mySugr-Logging\\\\/Sample\\\\/ViewController.swift\\\",\\\"line\\\":23,\\\"timestamp\\\":1522849299,\\\"deviceModel\\\":\\\"x86_64\\\"}\n"
+				},
+				"url": {
+					"raw": "http://159.89.0.101:9200/logs/_bulk",
+					"protocol": "http",
+					"host": [
+						"159",
+						"89",
+						"0",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"logs",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all logs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match_all\": {}\n  }\n}"
+				},
+				"url": {
+					"raw": "http://159.89.0.101:9200/logs/_delete_by_query",
+					"protocol": "http",
+					"host": [
+						"159",
+						"89",
+						"0",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"logs",
+						"_delete_by_query"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Logs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "kKuIVVk68PaJOaUI4HBvqN45",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "elastic",
+				"type": "string"
+			}
+		]
+	}
+}
