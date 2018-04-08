@@ -11,6 +11,8 @@ class ElasticsearchBridge {
         this.rootUrl = process.env.ELASTICSEARCH_URL || 'https://logging.mort3m.io/elasticsearch'
         this.authUsername = process.env.ELASTICSEARCH_USERNAME || 'elastic'
         this.authPassword = process.env.ELASTICSEARCH_PASSWORD || 'changeme' 
+
+        console.log('Elasticsearch server: '+ this.rootUrl)
     }
 
     async addBulkLogs(logs) {
@@ -28,10 +30,16 @@ class ElasticsearchBridge {
         })
         
         try {
-            const response = await Axios.post(endpoint, formattedLog, { auth: {
-                username: this.authUsername,
-                password: this.authPassword
-            }})
+            const response = await Axios.post(endpoint, formattedLog, { 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                auth: {
+                    username: this.authUsername,
+                    password: this.authPassword
+                }
+            })
+
             return response
         } catch(err) {
             throw err

@@ -7,16 +7,19 @@ routes.post('/add', async (req, res) => {
 
     try {
         const response = await elasticsearchBridge.addBulkLogs(req.body)
-        return res.json(response)
+
+        if (response.data.errors) {
+            return res.status(500).json({
+                error: err
+            })
+        }
+
+        return res.json(response.data)
     } catch(err) {
 
-        console.log(err)
-
-        return res
-            .status(500)
-            .json({
-                error: err.message
-            })
+        return res.status(500).json({
+            error: err
+        })
     }
 })
 
