@@ -29,7 +29,7 @@ services:
       - elasticsearch
 
   logging-backend:
-    build: ./app
+    build: ./app/
     container_name: logging-backend
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200

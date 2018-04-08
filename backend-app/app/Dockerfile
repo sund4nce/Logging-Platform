@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y curl apt-transport-https && \
 RUN npm install babel-cli --save
 
 WORKDIR /app
+COPY ./package.json /app/package.json
+RUN yarn install
 COPY . /app
 CMD yarn start
 EXPOSE 1337
