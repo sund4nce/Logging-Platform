@@ -21,6 +21,7 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_USERNAME=elastic
       - ELASTICSEARCH_PASSWORD=changeme
+      - SERVER_BASEPATH=/kibana
     networks:
       - esnet
     ports:
