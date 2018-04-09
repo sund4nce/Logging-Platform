@@ -17,7 +17,13 @@ app.use(logger('dev', {
     skip: () => app.get('env') === 'test'
 }))
 
-app.use('/api/v1/log', logRoutes)
+app.use('/v1/log', logRoutes)
+
+app.get('/', (req, res) => {
+    res.status(200).json({
+        apiVersion: '0.1'
+    })
+})
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
