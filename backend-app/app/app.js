@@ -19,7 +19,7 @@ app.use(logger('dev', {
 
 app.use('/v1/log', logRoutes)
 
-app.get('/', (req, res) => {
+app.get('/version', (req, res) => {
     res.status(200).json({
         apiVersion: '0.1'
     })
