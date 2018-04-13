@@ -1,2 +1,3 @@
-# Logging
-📡 Logging without hassle, built upon a pure open source stack.
+# Logging-Platform
+
+📡 Logging debug messages without hassle, built upon a pure open source stack.
